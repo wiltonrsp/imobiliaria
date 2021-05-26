@@ -146,7 +146,7 @@
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-success">
+            <div class="small-box bg-success" data-toggle="modal" data-target="#exampleModal">
               <div class="inner">
                 <h3>Cadastro    </h3>
 
@@ -216,7 +216,42 @@
   <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+<!--Modal cadastro-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cadastro de domicilio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="cadastro.php" method="POST">
+            Foto do domicilio:
+            <input class="form-control" type="file" name="foto">
+            <br>
+            Endereço:
+            <input class="form-control" type='text' name="endereco">
+            <br>
+            Aluguel:
+            <input class="form-control" type='number' name="aluguel">
+            <br>
+            Inquilino:
+            <select class="form-control">
+              <option>aqui vai puxa o inquilino</option>
+            </select>
 
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success">Cadastrar</button>
+      </div>
+    </div>
+  </div>
+</div>  
+</div>
 <!-- jQuery -->
 <script src="plugins/jquery/jquery.min.js"></script>
 <!-- jQuery UI 1.11.4 -->
