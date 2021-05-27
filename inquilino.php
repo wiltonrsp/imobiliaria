@@ -195,14 +195,14 @@
                         echo "<td>" . $row['telefone'] . "</td>";
                         echo "<td>" . $row['email'] . "</td>";
                         ?>
-                        <td ><a href="#" class="btn btn-warning" style="color:white" data-toggle="modal" data-target="#editainquilino<?=$row['id']?>"><i class="fas fa-edit" ></i></a> <a href="#" class="btn btn-primary"><i class="fas fa-eye" style="color:white"></i></a> <a href="#" class="btn btn-danger"><i class="fas fa-trash"></i></a></td>
+                        <td ><a href="#" class="btn btn-warning" style="color:white" data-toggle="modal" data-target="#editainquilino<?=$row['id']?>"><i class="fas fa-edit" ></i></a> <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#visualizarnquilino<?=$row['id']?>"><i class="fas fa-eye" style="color:white"></i></a> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#excluirinquilino<?=$row['id']?>"><i class="fas fa-trash"></i></a></td>
                         
                         
                           <div class="modal fade" id="editainquilino<?=$row['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
                                   <div class="modal-content">
                                     <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">Cadastro do Inquilino</h5>
+                                      <h5 class="modal-title" id="exampleModalLabel">Editar Inquilino</h5>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                       </button>
@@ -224,15 +224,74 @@
                                           Email:
                                           <input class="form-control" type="email" name="email"value="<?=$row['email']?>">
                                           <br>
-                                          <input class="form-control" type="email" name="id"value="<?=$row['id']?>" hidden>
+                                          <input class="form-control" type="hidden" name="id"value="<?=$row['id']?>" >
                                           <br>
-                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-                                          <button type="submit" class="btn btn-success">Cadastrar</button>
+                                          <center>
+                                          <button type="submit" class="btn btn-success">Editar</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                          </center>
                                       </form>
                                     </div>
                                   </div>
                                 </div>
-                              </div> 
+                              </div>
+
+                              <div class="modal fade" id="visualizarnquilino<?=$row['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Visualizar Inquilino</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                           Nome Completo:
+                                          <input class="form-control" type="text" name="nome" value="<?=$row['nome']?>" disabled>
+                                          <br>
+                                          CPF:
+                                          <input class="form-control" type="number" name="cpf" value="<?=$row['cpf']?>" disabled>
+                                          <br>
+                                          RG:
+                                          <input class="form-control" type="text" name="rg" value="<?=$row['rg']?>" disabled>
+                                          <br>
+                                          Telefone:
+                                          <input class="form-control" type="number" name="telefone"value="<?=$row['telefone']?>" disabled>
+                                          <br>
+                                          Email:
+                                          <input class="form-control" type="email" name="email"value="<?=$row['email']?>" disabled>
+                                          <br>
+                                          <input class="form-control" type="hidden" name="id"value="<?=$row['id']?>" disabled>
+                                          <br>
+                                          <center><button type="button" class="btn btn-primary" data-dismiss="modal">Voltar</button></center>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div class="modal fade" id="excluirinquilino<?=$row['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content">
+                                    <div class="modal-header">
+                                      <h5 class="modal-title" id="exampleModalLabel">Excluir Inquilino</h5>
+                                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                      </button>
+                                    </div>
+                                    <div class="modal-body">
+                                    <form action="excluirinquilino.php" method="POST">
+                                           <center><p>Deseja Realmente Excluir o Inquilino: <br> <b><?=$row['nome']?></b> </p></center>
+                                         
+                                          <input class="form-control" type="hidden" name="id"value="<?=$row['id']?>" >
+                                          <br>
+                                          <center>
+                                          <button type="submit" class="btn btn-success">Excluir</button>  
+                                          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button></center>
+                                       </form>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                               </tr>
                     <?php
                       }
@@ -298,8 +357,10 @@
             Email:
             <input class="form-control" type='email' name="email">
             <br>
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            <center>
             <button type="submit" class="btn btn-success">Cadastrar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+            </center>
         </form>
       </div>
     </div>

@@ -8,14 +8,11 @@ if($conn === false){
 }
  
 // Escape user inputs for security
-$nome = mysqli_real_escape_string($conn, $_REQUEST['nome']);
-$cpf = mysqli_real_escape_string($conn, $_REQUEST['cpf']);
-$telefone = mysqli_real_escape_string($conn, $_REQUEST['telefone']);
-$rg = mysqli_real_escape_string($conn, $_REQUEST['rg']);
-$email = mysqli_real_escape_string($conn, $_REQUEST['email']);
+
+$id = mysqli_real_escape_string($conn, $_REQUEST['id']);
  
 // Attempt insert query execution
-$sql = "INSERT INTO inquilinos (nome, cpf, telefone,rg,email) VALUES ('$nome', '$cpf', '$telefone','$rg','$email')";
+$sql = "DELETE from inquilinos where id = '$id' ";
 if(mysqli_query($conn, $sql)){
     echo "Records added successfully.";
 } else{
