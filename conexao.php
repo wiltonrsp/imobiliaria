@@ -3,7 +3,7 @@ $usuario='root';
 $senha="";
 $host="localhost";
 $banco="imobiliaria";
-$conn = new PDO('mysql:host='.$host.';dbname='.$banco,$usuario,$senha);
+$conn = mysqli_connect($host,$usuario,$senha,$banco,);
 if($conn){
     echo "bom";
 }else{
