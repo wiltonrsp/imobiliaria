@@ -5,9 +5,9 @@ $host="localhost";
 $banco="imobiliaria";
 $conn = mysqli_connect($host,$usuario,$senha,$banco,);
 if($conn){
-    echo "bom";
+     
 }else{
-    echo "ruim";
+    
 }
 
 ?>  

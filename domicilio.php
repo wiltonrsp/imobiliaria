@@ -1,3 +1,9 @@
+<?php
+require "conexao.php";
+$sql = 'SELECT * FROM domicilios';
+$resultado=mysqli_query($conn,$sql);
+ 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -180,15 +186,118 @@
                     </tr>
                     </thead>
                     <tbody>
+                         <?php   while($row = $resultado->fetch_assoc()){
+?>
                     <tr>
-
-                      <td> </td>
-                      <td> 
-                      </td>
-                      <td></td>
-                      <td></td>
-                      <td ><a href="#" class="btn btn-warning"><i class='fas fa-edit' style='color:white'></i></a> <a href="#" class='btn btn-primary'><i class='fas fa-eye' style='color:white'></i></a> <a href="#" class="btn btn-danger"><i class='fas fa-trash'></i></a></td>
+                   
+                   
+                      <td><img src="domicilios/<?=$row['foto']?>" style='width:100px;height:100px'></td>
+                      <td><?=$row['endereco']?></td>
+                      <td><?=$row['aluguel']?></td>
+                      <td><?=$row['inquilino']?></td>
+                      <td ><a href="#" class="btn btn-warning" data-toggle="modal" data-target="#modaledit<?=$row['id']?>"><i class='fas fa-edit' style='color:white'></i></a> <a href="#" class='btn btn-primary' data-toggle="modal" data-target="#modalview<?=$row['id']?>"><i class='fas fa-eye' style='color:white'></i></a> <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#modaldelete<?=$row['id']?>"><i class='fas fa-trash'></i></a></td>
                     </tr>
+<div class="modal fade" id="modaledit<?=$row['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edição de domicilio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="editadomicilio.php" enctype="multipart/form-data" method="POST">
+        <center><img src="domicilios/<?=$row['foto']?>" style='width:200px;height:200px'></center><br>
+            Foto nova domicilio:
+            <input class="form-control" type="file" name="foto">
+            <input type='hidden' name='id' value='<?=$row['id']?>'>
+            <input type='hidden' name='foto2' value='<?=$row['foto']?>'>
+            <br>
+            Endereço:
+            <input class="form-control" type='text' name="endereco" value='<?=$row['endereco']?>'>
+            <br>
+            Aluguel:
+            <input class="form-control" type='number' name="aluguel"  value='<?=$row['aluguel']?>'>
+            <br>
+            Inquilino:
+            <select class="form-control" name='inquilino' value='<?=$row['inquilino']?>'>
+              <option>aqui vai puxa o inquilino2</option>
+            </select>
+
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+        <button type="submit" class="btn btn-success">Editar <i class='fas fa-edit'></i></button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="modalview<?=$row['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Visualizando o Domicilio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <center><img src="domicilios/<?=$row['foto']?>" style='width:200px;height:200px'></center>
+            <br>
+            Endereço:
+            <input class="form-control" type='text'  value='<?=$row['endereco']?>' disabled>
+            <br>
+            Aluguel:
+            <input class="form-control" type='number' value='<?=$row['aluguel']?>' disabled>
+            <br>
+            Inquilino:
+            <input type='text' class='form-control' value='<?=$row['inquilino']?>' disabled>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+    
+      </div>
+    </div>
+  </div>
+</div> 
+<div class="modal fade" id="modaldelete<?=$row['id']?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Remoção  do Domicilio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <form action='deletedomicilio.php' method='POST'>
+            <input type='hidden' name='id' value='<?=$row['id']?>'>
+            <input type='hidden' name='foto' value='<?=$row['foto']?>'>
+            <center><img src="domicilios/<?=$row['foto']?>" style='width:200px;height:200px'></center>
+            <br>
+            Endereço:
+            <input class="form-control" type='text'  value='<?=$row['endereco']?>' disabled>
+            <br>
+            Aluguel:
+            <input class="form-control" type='number' value='<?=$row['aluguel']?>' disabled>
+            <br>
+            Inquilino:
+            <input type='text' class='form-control' value='<?=$row['inquilino']?>' disabled>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Fechar</button>
+        <button type="submit" class="btn btn-success">Remover <i class='fas fa-trash'></i></button>
+        </form>                        
+      </div>
+    </div>
+  </div>
+</div>     
+                    <?php
+
+}?>
                     </tbody>
                   </table>
                 </div>
